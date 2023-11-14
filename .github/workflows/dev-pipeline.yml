@@ -1,0 +1,37 @@
+name: "Terraform Deployment Dev" 
+
+on:
+  push:
+    branches:
+      - dev 
+
+jobs:
+  terraform:
+    name: 'teraform'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+              
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+    
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@1
+
+    - name: Terraform Format and Validation
+      run: | 
+        cd ./dev/
+        terraform init
+        terraform validate
+
+    - name: Plan Terraform
+      run: cd ./dev/ && terraform plan
+
+    - name: Apply Terraform
+      run: cd ./dev/ && terraform apply -auto-approve
