@@ -10,3 +10,8 @@ terraform {
 provider "aws" {
   region = "eu-central-1"
 }
+
+module "ecr" {
+  source = "../module/ecr/"
+  env = "dev"
+}
