@@ -12,6 +12,6 @@ provider "aws" {
 }
 
 module "ecr" {
-  source = "../modules/ecr"
-  env    = "prod"
+  source = "../modules/ecr/"
+  env = "prod"
 }
