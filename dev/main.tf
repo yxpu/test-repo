@@ -11,7 +11,7 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-module "ecr" {
-  source = "../modules/ecr/"
-  env = "dev"
-}
+#module "ecr" {
+#  source = "../modules/ecr/"
+#  env = "dev"
+#}
